@@ -47,6 +47,22 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Profile {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+  weight Float?
+  startWeight Float?
+  bmi Float?
+  cardioFitness Float?
+  runningDistance Float?
+  runningTimestamp DateTime?
+  steps Float?
+  stepsTimestamp DateTime?
+  workoutMinutes Float?
+  workoutTimestamp DateTime?
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -55,6 +71,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  profile       Profile?
 }
 
 model VerificationToken {
