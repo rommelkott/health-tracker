@@ -1,28 +1,24 @@
-# Create T3 App
+# Health Tracker
+This app allows users to track and share their weight loss and fitness progress with others. Just a project to get back into the groove of programming & to upgrade my personal site.
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Site was boostrapped with T3, plan to try this again with astro for fun.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Here are some of the features we plan to include in the webapp:
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- User authentication to securely log in and access personal account information
+- User profile editing to update details such as name, weight, exercise, etc
+- A user-friendly interface built with tailwind for easy navigation
+- An API to enable integration with external scripts and apps
+- Downloadable Apple shortcuts that allow for automation with iPhones
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Todo
 
-## Learn More
+Here is our current to-do list for the Weight Tracker webapp:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- [ ] Implement user authentication
+- [ ] Allow for editing of account details
+- [ ] Build API to enable integration with external scripts
+- [ ] Create downloadable shortcuts for desktop and mobile devices
+- [ ] Design and implement a user-friendly interface with Bootstrap
