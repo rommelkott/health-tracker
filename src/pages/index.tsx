@@ -77,7 +77,7 @@ const Home: NextPage = () => {
             />
             <StatisticCard
               IconComponent={FaFire}
-              title="Cardio Fitness"
+              title="Daily Steps"
               titleColor="text-orange-600"
               statistic={{
                 value: "13,196",
