@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import { StatisticCard } from "../components/StatisticCard";
 import { InformationCard } from "../components/InformationCard";
-import { FaFire, FaHeart, FaRunning } from "react-icons/fa";
+import { FaFire, FaHeart, FaRunning, FaDiscord } from "react-icons/fa";
 import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
 
@@ -24,9 +24,23 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center  bg-gray-200">
         <div className="container flex max-w-4xl flex-col justify-center gap-4 px-4 py-6">
-          <div>
-            <h1 className=" text-5xl font-bold text-black">Summary</h1>
-            <h2>Last updated 12:25 pm</h2>
+          {/* */}
+          <div className="inline-flex items-center justify-between">
+            <div>
+              <h1 className=" text-5xl font-bold text-black">Summary</h1>
+              <h2>Last updated 12:25 pm</h2>
+            </div>
+            <div className="justify-items-end">
+              <button
+                className="rounded-lg bg-blue-700 py-2 px-4 font-bold text-white  hover:bg-blue-600"
+                onClick={() => signIn("discord")}
+              >
+                <div className="inline-flex items-center gap-2">
+                  <FaDiscord />
+                  <span>Sign in</span>
+                </div>
+              </button>
+            </div>
           </div>
           <InformationCard
             IconComponent={HiInformationCircle}
