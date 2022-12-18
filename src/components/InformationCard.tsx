@@ -1,5 +1,3 @@
-// create a card component with type component
-
 import React, { Component } from "react";
 
 interface CardProps {
@@ -18,7 +16,7 @@ export const InformationCard: React.FC<CardProps> = ({
 }) => {
   return (
     <>
-      <div className="rounded-2xl bg-white p-6">
+      <div className="rounded-2xl bg-white p-6 shadow-xl shadow-gray-300">
         <div className={`${titleColor} mb-3 min-w-[300px] text-xl font-bold`}>
           <div className="inline-flex items-center gap-2">
             <Icon className="" />
