@@ -8,18 +8,17 @@ import { InformationCard } from "../components/InformationCard";
 import { FaFire, FaHeart, FaRunning, FaDiscord } from "react-icons/fa";
 import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
+import { ProfileButton } from "../components/ProfileButton";
+import { middlewareMarker } from "@trpc/server/dist/core/internals/utils";
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
-
+  const { data: session, status } = useSession();
   return (
     <>
       <Head>
-        <title>Rommel's Weight Summary</title>
-        <meta
-          name="description"
-          content="Take a peek at Rommel's weight loss progress."
-        />
+        <title>Health Summary</title>
+        <meta name="description" content="Take a look at my health summary" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center  bg-gray-200">
@@ -31,15 +30,11 @@ const Home: NextPage = () => {
               <h2>Last updated 12:25 pm</h2>
             </div>
             <div className="justify-items-end">
-              <button
-                className="rounded-lg bg-blue-700 py-2 px-4 font-bold text-white  hover:bg-blue-600"
-                onClick={() => signIn("discord")}
-              >
-                <div className="inline-flex items-center gap-2">
-                  <FaDiscord />
-                  <span>Sign in</span>
-                </div>
-              </button>
+              <ProfileButton
+                session={session}
+                status={status}
+                handleSignIn={() => signIn("discord")}
+              />
             </div>
           </div>
           <InformationCard
