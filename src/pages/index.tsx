@@ -57,7 +57,7 @@ const Home: NextPage = () => {
             />
             <StatisticCard
               IconComponent={BsPersonFill}
-              title="Body Pass Index"
+              title="Body Mass Index"
               titleColor="text-purple-600"
               statistic={{
                 value: "30.93",
