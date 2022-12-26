@@ -23,6 +23,7 @@ export const authOptions: NextAuthOptions = {
       // Default user profile for new users
       const userProfile = {
         description: "Hi, I'm a new user.",
+        lastUpdated: new Date(),
       };
 
       // If the user is new, update the user's profile
