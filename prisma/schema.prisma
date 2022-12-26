@@ -51,9 +51,11 @@ model Profile {
   id     String @id @default(cuid())
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+  lastUpdated DateTime @default(now()) @updatedAt 
   description String?
   weight Float?
   startWeight Float?
+  age Int?
   bmi Float?
   cardioFitness Float?
   runningDistance Float?
