@@ -120,9 +120,9 @@ const Home: NextPage = () => {
                 title="Body Mass Index"
                 titleColor="text-purple-600"
                 statistic={{
-                  value: "30.93",
+                  value: profile.bmi.toString(),
                   unit: "BMI",
-                  description: "Obese",
+                  description: getBMICategory(profile.bmi),
                 }}
               />
             )}
@@ -210,6 +210,24 @@ function getVO2MaxCategory(vo2Max: number, age: number): string {
   return "High";
 }
 
+function getBMICategory(bmi: number): string {
+  if (bmi < 18.5) {
+    return "Underweight";
+  }
+  if (bmi < 25) {
+    return "Normal";
+  }
+  if (bmi < 30) {
+    return "Overweight";
+  }
+  if (bmi < 35) {
+    return "Obese";
+  }
+
+  return "Extremely Obese";
+}
+
+
 function formatDate(date: Date): string {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -224,5 +242,6 @@ function formatDate(date: Date): string {
     return daysAgo + " days ago at " + date.toLocaleTimeString();
   }
 }
+
 
 export default Home;
