@@ -5,12 +5,14 @@ interface ProfileButtonProps {
   status: "authenticated" | "loading" | "unauthenticated";
   session: Session | null;
   handleSignIn?: () => void;
+  handleSignOut?: () => void;
 }
 
 export const ProfileButton: React.FC<ProfileButtonProps> = ({
   status,
   session,
   handleSignIn,
+  handleSignOut,
 }) => {
   return (
     <>
@@ -22,6 +24,7 @@ export const ProfileButton: React.FC<ProfileButtonProps> = ({
                 className="h-10 w-10 rounded-full"
                 src={session.user?.image || ""}
                 alt="profile"
+                onClick={handleSignOut}
               />
               {/* <span className="text-lg font-bold text-black">
                 {session.user?.name || "User"}

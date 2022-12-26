@@ -32,6 +32,7 @@ const Home: NextPage = () => {
                 session={session}
                 status={status}
                 handleSignIn={() => signIn("discord")}
+                handleSignOut={() => signOut()}
               />
             </div>
           </div>
