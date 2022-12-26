@@ -23,9 +23,9 @@ export const ProfileButton: React.FC<ProfileButtonProps> = ({
                 src={session.user?.image || ""}
                 alt="profile"
               />
-              <span className="text-lg font-bold text-black">
+              {/* <span className="text-lg font-bold text-black">
                 {session.user?.name || "User"}
-              </span>
+              </span> */}
             </div>
           </>
         )}
