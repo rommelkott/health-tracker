@@ -10,6 +10,7 @@ import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
 import { ProfileButton } from "../components/ProfileButton";
 import { Header } from "../components/Header";
+import { Summary } from "../components/Summary";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
@@ -43,7 +44,9 @@ const Home: NextPage = () => {
               </button>
             </div>
           </div>
-          <SampleProfile />
+          <Summary
+            uid={'clc5fdf1t000a6eko4xggq2uo'}
+          />
         </div>
         <div about="footer" className="bg-gray-900 p-6">
           <h2 className="text-gray-200">Just a fun project to get back into coding ~ <a className="font-bold" href="https://github.com/rommelkott">@rommelkott</a></h2>
