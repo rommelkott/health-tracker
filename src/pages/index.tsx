@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       <main>
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 items-center place-items-center bg-gray-200 min-h-screen">
           <div className="bg-gray-100 w-full h-full items-center grid">
-            <div className="text-center 2xl:text-left p-0 2xl:p-12 my-24">
+            <div about="Main title" className="text-center 2xl:text-left p-0 2xl:p-12 my-24">
               <h1 className="text-5xl md:text-7xl mb-3 font-extrabold">
                 Health Tracker
               </h1>
@@ -30,107 +30,110 @@ const Home: NextPage = () => {
                 A simple way to share your health and fitness goals with your friends.
               </h2>
               <button className="border-y bg-indigo-600 text-white px-4 py-2 rounded-lg mt-4 font-semibold">
-                <a href="https://discord.com/api/oauth2/authorize?client_id=888888888888888888&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code&scope=identify%20email%20guilds">
+                <a onClick={() => signIn('discord')}>
                   Sign in with Discord
                 </a>
               </button>
             </div>
           </div>
-          <div about="My summary illustration">
-            <div className="flex max-w-4xl flex-col justify-center gap-4 skew-y-6 px-24 py-24">
-              <div className="inline-flex items-center justify-between">
-                <div>
-                  <h1 className="text-5xl font-bold text-black mb-2">My Summary</h1>
-                  <h2>Last updated 12:25 pm</h2>
-                </div>
-                <div className="justify-items-end">
-                  <ProfileButton
-                    session={session}
-                    status={status}
-                    handleSignIn={() => signIn("discord")}
-                    handleSignOut={() => signOut()}
-                  />
-                </div>
-              </div>
-              <InformationCard
-                IconComponent={HiInformationCircle}
-                title="Information"
-                titleColor="text-blue-600"
-                bodyText="I am currently working towards achieving a healthy weight through regular exercise and workouts. My goal is to reach a healthy weight through these efforts."
-              />
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
-                <StatisticCard
-                  IconComponent={BsPersonFill}
-                  title="Weight"
-                  titleColor="text-purple-600"
-                  statistic={{
-                    value: "220.90",
-                    unit: "lbs",
-                    description: "(-78.23 lbs)",
-                  }}
-                />
-                <StatisticCard
-                  IconComponent={FaRunning}
-                  title="Running"
-                  titleColor="text-green-600"
-                  statistic={{
-                    value: "3.12",
-                    unit: "MI",
-                    description: "Yesterday",
-                  }}
-                />
-                <StatisticCard
-                  IconComponent={BsPersonFill}
-                  title="Body Mass Index"
-                  titleColor="text-purple-600"
-                  statistic={{
-                    value: "30.93",
-                    unit: "BMI",
-                    description: "Obese",
-                  }}
-                />
-                <StatisticCard
-                  IconComponent={BsHeartFill}
-                  title="Cardio Fitness"
-                  titleColor="text-red-600"
-                  statistic={{
-                    value: "33.6",
-                    unit: "VO2 max",
-                    description: "Low",
-                  }}
-                />
-                <StatisticCard
-                  IconComponent={FaFire}
-                  title="Daily Steps"
-                  titleColor="text-orange-600"
-                  statistic={{
-                    value: "13,196",
-                    unit: "Steps",
-                    description: "Yesterday",
-                  }}
-                />
-                <StatisticCard
-                  IconComponent={FaFire}
-                  title="Workouts"
-                  titleColor="text-orange-600"
-                  statistic={{
-                    value: "56",
-                    unit: "Min",
-                    description: "Yesterday",
-                  }}
-                />
-              </div>
-            </div>
-          </div>
+          <SampleProfile />
         </div>
-        <div>
-          <div className="bg-gray-900 p-6">
-            <h2 className="text-gray-200">Just a fun project to get back into coding ~ <a className="font-bold" href="https://github.com/rommelkott">@rommelkott</a></h2>
-          </div>
+        <div about="footer" className="bg-gray-900 p-6">
+          <h2 className="text-gray-200">Just a fun project to get back into coding ~ <a className="font-bold" href="https://github.com/rommelkott">@rommelkott</a></h2>
         </div>
       </main>
     </>
   );
 };
 
+const SampleProfile = () => {
+  return (
+    <div about="My summary illustration">
+      <div className="flex max-w-4xl flex-col justify-center gap-4 skew-y-6 px-24 py-24">
+        <div className="inline-flex items-center justify-between">
+          <div>
+            <h1 className="text-5xl font-bold text-black mb-2">My Summary</h1>
+            <h2>Last updated 12:25 pm</h2>
+          </div>
+          <div className="justify-items-end">
+            <ProfileButton
+              session={null}
+              status={"authenticated"}
+              handleSignIn={() => { }}
+              handleSignOut={() => { }}
+            />
+          </div>
+        </div>
+        <InformationCard
+          IconComponent={HiInformationCircle}
+          title="Information"
+          titleColor="text-blue-600"
+          bodyText="I am currently working towards achieving a healthy weight through regular exercise and workouts. My goal is to reach a healthy weight through these efforts."
+        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
+          <StatisticCard
+            IconComponent={BsPersonFill}
+            title="Weight"
+            titleColor="text-purple-600"
+            statistic={{
+              value: "220.90",
+              unit: "lbs",
+              description: "(-78.23 lbs)",
+            }}
+          />
+          <StatisticCard
+            IconComponent={FaRunning}
+            title="Running"
+            titleColor="text-green-600"
+            statistic={{
+              value: "3.12",
+              unit: "MI",
+              description: "Yesterday",
+            }}
+          />
+          <StatisticCard
+            IconComponent={BsPersonFill}
+            title="Body Mass Index"
+            titleColor="text-purple-600"
+            statistic={{
+              value: "30.93",
+              unit: "BMI",
+              description: "Obese",
+            }}
+          />
+          <StatisticCard
+            IconComponent={BsHeartFill}
+            title="Cardio Fitness"
+            titleColor="text-red-600"
+            statistic={{
+              value: "33.6",
+              unit: "VO2 max",
+              description: "Low",
+            }}
+          />
+          <StatisticCard
+            IconComponent={FaFire}
+            title="Daily Steps"
+            titleColor="text-orange-600"
+            statistic={{
+              value: "13,196",
+              unit: "Steps",
+              description: "Yesterday",
+            }}
+          />
+          <StatisticCard
+            IconComponent={FaFire}
+            title="Workouts"
+            titleColor="text-orange-600"
+            statistic={{
+              value: "56",
+              unit: "Min",
+              description: "Yesterday",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 export default Home;
