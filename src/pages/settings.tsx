@@ -53,7 +53,7 @@ const Home: NextPage = () => {
           <div className="container flex max-w-4xl flex-col justify-center gap-4 px-4 py-6">
             <div className="inline-flex items-center justify-between">
               <div>
-                <h1 className="mb-2 text-5xl font-bold text-black">Account Settings</h1>
+                <h1 className="mb-2 text-5xl font-bold text-black">Settings</h1>
                 <h2>Adjust your account and profile</h2>
               </div>
             </div>
