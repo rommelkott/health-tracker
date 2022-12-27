@@ -61,7 +61,7 @@ const Home: NextPage = () => {
           <div className="inline-flex items-center justify-between">
             <div>
               <h1 className=" text-5xl font-bold text-black">Summary</h1>
-              <h2>Last updated 12:25 pm</h2>
+              <h2>{formatDate(profile.lastUpdated)}</h2>
             </div>
             <div className="justify-items-end">
               <ProfileButton
@@ -234,14 +234,13 @@ function formatDate(date: Date): string {
   const yesterday = new Date(today.getTime() - 86400000);
 
   if (date.getDate() === today.getDate()) {
-    return "Today at " + date.toLocaleTimeString();
+    return "Today at " + date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
   } else if (date.getDate() === yesterday.getDate()) {
-    return "Yesterday at " + date.toLocaleTimeString();
+    return "Yesterday at " + date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
   } else {
     const daysAgo = Math.round((today.getTime() - date.getTime()) / 86400000);
-    return daysAgo + " days ago at " + date.toLocaleTimeString();
+    return daysAgo + " days ago at " + date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
   }
 }
-
 
 export default Home;
