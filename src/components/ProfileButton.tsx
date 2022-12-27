@@ -62,10 +62,10 @@ export const ProfileButton: React.FC<ProfileButtonProps> = ({
           <>
             <div className="flex items-center gap-2">
               <span
-                className="cursor-pointer text-lg font-normal text-black"
+                className="cursor-pointer text-lg font-normal text-white"
                 onClick={handleSignIn}
               >
-                Sign in
+                Sign In
               </span>
             </div>
           </>
