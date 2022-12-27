@@ -75,6 +75,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profile       Profile?
+  apiKey           String?   @unique
 }
 
 model VerificationToken {
