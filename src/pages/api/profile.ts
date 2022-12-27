@@ -23,7 +23,7 @@ const restricted = async (req: NextApiRequest, res: NextApiResponse) => {
       profile: z.object({
         description: z.string().optional(),
         weight: z.number().optional(),
-        weightStart: z.number().optional(),
+        startWeight: z.number().optional(),
         age: z.number().optional(),
         bmi: z.number().optional(),
         cardioFitness: z.number().optional(),
