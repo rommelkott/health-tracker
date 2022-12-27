@@ -9,6 +9,7 @@ import { FaFire, FaHeart, FaRunning, FaDiscord } from "react-icons/fa";
 import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
 import { ProfileButton } from "../components/ProfileButton";
+import { Header } from "../components/Header";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
@@ -20,6 +21,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Header
+          session={session}
+          status={status}
+          handleSignIn={() => signIn('discord')}
+          handleSignOut={() => signOut()}
+        />
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 items-center place-items-center bg-gray-200 min-h-screen">
           <div className="bg-gray-100 w-full h-full items-center grid">
             <div about="Main title" className="text-center 2xl:text-left p-0 2xl:p-12 my-24">
@@ -49,7 +56,7 @@ const Home: NextPage = () => {
 const SampleProfile = () => {
   return (
     <div about="My summary illustration">
-      <div className="flex max-w-4xl flex-col justify-center gap-4 skew-y-6 px-24 py-24">
+      <div className="flex max-w-4xl flex-col justify-center gap-4 px-4 py-8">
         <div className="inline-flex items-center justify-between">
           <div>
             <h1 className="text-5xl font-bold text-black mb-2">My Summary</h1>
