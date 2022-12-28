@@ -24,9 +24,13 @@ export const InformationCard: React.FC<CardProps> = ({
           </div>
         </div>
         <div>
-          <span className="text-lg font-normal text-black">{bodyText ||
-            <div className="bg-slate-300 h-4 rounded-lg w-20 inline-block animate-pulse" />
-          }</span>
+
+          <span className="text-lg font-normal text-black">
+            {bodyText || <div className="flex flex-col gap-3">
+              <div className="bg-slate-300 h-5 rounded-lg w-96 inline-block animate-pulse" />
+              <div className="bg-slate-300 h-5 rounded-lg w-48 inline-block animate-pulse" />
+            </div>}
+          </span>
         </div>
       </div>
     </>

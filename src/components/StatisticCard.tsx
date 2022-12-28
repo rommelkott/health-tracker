@@ -38,11 +38,11 @@ export const StatisticCard: React.FC<CardProps> = ({
           <h1>
             <span className="text-5xl font-bold text-black">
               {
-                statistic?.value || <div className="bg-slate-300 h-8 rounded-lg w-44 inline-block animate-pulse" />
+                statistic?.value || <div className="bg-slate-300 h-8 rounded-lg w-32 inline-block animate-pulse" />
               }
             </span>
             <span className="ml-2 text-3xl font-bold text-gray-600">
-              {statistic?.unit || <div className="bg-slate-300 h-8 rounded-lg w-20 inline-block animate-pulse" />}
+              {statistic?.unit || <div className="bg-slate-300 h-7 rounded-lg w-12 inline-block animate-pulse" />}
             </span>
           </h1>
           <div className="font-semibold text-gray-600">
