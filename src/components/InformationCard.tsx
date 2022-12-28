@@ -5,7 +5,7 @@ interface CardProps {
   // tailwind css color
   titleColor?: string;
   IconComponent: React.ComponentType<any>;
-  bodyText: string;
+  bodyText: string | undefined;
 }
 
 export const InformationCard: React.FC<CardProps> = ({
@@ -24,7 +24,9 @@ export const InformationCard: React.FC<CardProps> = ({
           </div>
         </div>
         <div>
-          <span className="text-lg font-normal text-black">{bodyText}</span>
+          <span className="text-lg font-normal text-black">{bodyText ||
+            <div className="bg-slate-300 h-4 rounded-lg w-20 inline-block animate-pulse" />
+          }</span>
         </div>
       </div>
     </>
