@@ -46,6 +46,7 @@ const Home: NextPage = () => {
           </div>
           <Summary
             uid={'clc5fdf1t000a6eko4xggq2uo'}
+            demoMode={true}
           />
         </div>
         <div about="footer" className="bg-gray-900 p-6">
@@ -56,94 +57,4 @@ const Home: NextPage = () => {
   );
 };
 
-const SampleProfile = () => {
-  return (
-    <div about="My summary illustration">
-      <div className="flex max-w-4xl flex-col justify-center gap-4 px-4 py-8">
-        <div className="inline-flex items-center justify-between">
-          <div>
-            <h1 className="text-5xl font-bold text-black mb-2">My Summary</h1>
-            <h2>Last updated 12:25 pm</h2>
-          </div>
-          <div className="justify-items-end">
-            <ProfileButton
-              session={null}
-              status={"authenticated"}
-              handleSignIn={() => { }}
-              handleSignOut={() => { }}
-            />
-          </div>
-        </div>
-        <InformationCard
-          IconComponent={HiInformationCircle}
-          title="Information"
-          titleColor="text-blue-600"
-          bodyText="I am currently working towards achieving a healthy weight through regular exercise and workouts. My goal is to reach a healthy weight through these efforts."
-        />
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
-          <StatisticCard
-            IconComponent={BsPersonFill}
-            title="Weight"
-            titleColor="text-purple-600"
-            statistic={{
-              value: "220.90",
-              unit: "lbs",
-              description: "(-78.23 lbs)",
-            }}
-          />
-          <StatisticCard
-            IconComponent={FaRunning}
-            title="Running"
-            titleColor="text-green-600"
-            statistic={{
-              value: "3.12",
-              unit: "MI",
-              description: "Yesterday",
-            }}
-          />
-          <StatisticCard
-            IconComponent={BsPersonFill}
-            title="Body Mass Index"
-            titleColor="text-purple-600"
-            statistic={{
-              value: "30.93",
-              unit: "BMI",
-              description: "Obese",
-            }}
-          />
-          <StatisticCard
-            IconComponent={BsHeartFill}
-            title="Cardio Fitness"
-            titleColor="text-red-600"
-            statistic={{
-              value: "33.6",
-              unit: "VO2 max",
-              description: "Low",
-            }}
-          />
-          <StatisticCard
-            IconComponent={FaFire}
-            title="Daily Steps"
-            titleColor="text-orange-600"
-            statistic={{
-              value: "13,196",
-              unit: "Steps",
-              description: "Yesterday",
-            }}
-          />
-          <StatisticCard
-            IconComponent={FaFire}
-            title="Workouts"
-            titleColor="text-orange-600"
-            statistic={{
-              value: "56",
-              unit: "Min",
-              description: "Yesterday",
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
 export default Home;

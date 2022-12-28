@@ -65,6 +65,7 @@ const restricted = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(400).json({ error: "Failed to update user profile" });
   }
 
+  // wait three seconds to simulate a slow API
   res.send({
     updated: updateUser.id,
     keys
