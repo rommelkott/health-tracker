@@ -23,9 +23,6 @@ export const Summary: React.FC<SummaryProps> = ({ uid, demoMode = false }) => {
             refetchOnReconnect: false,
             refetchInterval: false,
             retry: false,
-            initialData: () => {
-                return undefined;
-            }
         });
 
     if (status === 'loading' && !demoMode) {
@@ -50,7 +47,6 @@ export const Summary: React.FC<SummaryProps> = ({ uid, demoMode = false }) => {
             <div className="inline-flex items-center justify-between">
                 <div>
                     <h1 className=" text-5xl font-bold text-black">Summary</h1>
-                    {/* <h2>{formatDate(profile.lastUpdated)}</h2> */}
                 </div>
             </div>
             <InformationCard

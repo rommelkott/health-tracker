@@ -1,14 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { trpc } from "../utils/trpc";
-import { StatisticCard } from "../components/StatisticCard";
-import { InformationCard } from "../components/InformationCard";
-import { FaFire, FaHeart, FaRunning, FaDiscord } from "react-icons/fa";
-import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
-import { HiInformationCircle } from "react-icons/hi";
-import { ProfileButton } from "../components/ProfileButton";
 import { Header } from "../components/Header";
 import { Summary } from "../components/Summary";
 

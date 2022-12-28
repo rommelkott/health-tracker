@@ -1,10 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { trpc } from "../utils/trpc";
 import { InformationCard } from "../components/InformationCard";
 import { HiInformationCircle } from "react-icons/hi";
-import { ProfileButton } from "../components/ProfileButton";
 import { Card, CardHeader } from "../components/Card";
 import { AiFillApi } from "react-icons/ai";
 import Header from "../components/Header";
@@ -95,28 +93,4 @@ const Home: NextPage = () => {
   );
 };
 
-const snippet = () => {
-  return (
-    <pre>
-      <code>
-
-        {`
-{
-"profile": {
-"description": "string",
-"weight": 0,
-"weightStart": 0,
-"age": 0,
-"bmi": 0,
-"cardioFitness" : 0,
-"runningFitness" : 0,
-"steps" : 0,
-"workoutMinutes" : 0,
-}
-}
-`}
-      </code>
-    </pre>
-  )
-};
 export default Home;
