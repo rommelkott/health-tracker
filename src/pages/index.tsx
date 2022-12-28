@@ -3,6 +3,7 @@ import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Header } from "../components/Header";
 import { Summary } from "../components/Summary";
+import { clientEnv } from "../env/schema.mjs";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
             </div>
           </div>
           <Summary
-            uid={'clc5fdf1t000a6eko4xggq2uo'}
+            uid={clientEnv.NEXT_PUBLIC_SHOWCASE_USER_ID || ''}
             demoMode={true}
           />
         </div>
