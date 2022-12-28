@@ -6,24 +6,29 @@ import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
 import { FaFire, FaHeart, FaRunning, FaDiscord } from "react-icons/fa";
 import { SiZeromq } from "react-icons/si";
 import { trpc } from "../utils/trpc";
+import { Profile } from "@prisma/client";
 
 interface SummaryProps {
     uid: string;
+    // will show all cards while loading, skip spinner and error message
+    demoMode?: boolean;
 }
 
-export const Summary: React.FC<SummaryProps> = ({ uid }) => {
+export const Summary: React.FC<SummaryProps> = ({ uid, demoMode = false }) => {
     const { status, data: profile, error } = trpc.profile.getProfile.useQuery({ userId: uid as string },
         {
-            enabled: !!uid,
-
+            enabled: uid !== undefined,
             refetchOnWindowFocus: false,
             refetchOnMount: false,
             refetchOnReconnect: false,
             refetchInterval: false,
             retry: false,
+            initialData: () => {
+                return undefined;
+            }
         });
 
-    if (status === 'loading') {
+    if (status === 'loading' && !demoMode) {
         return <div>
             <div className="flex justify-center items-center h-screen bg-gray-200">
                 <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
@@ -31,7 +36,7 @@ export const Summary: React.FC<SummaryProps> = ({ uid }) => {
         </div>
     }
 
-    if (status === 'error') {
+    if (status === 'error' && !demoMode) {
         return <div>
             <div className="flex flex-col gap-2 justify-center items-center h-screen bg-gray-200">
                 <div className="text-5xl font-bold text-red-600">Error</div>
@@ -45,17 +50,17 @@ export const Summary: React.FC<SummaryProps> = ({ uid }) => {
             <div className="inline-flex items-center justify-between">
                 <div>
                     <h1 className=" text-5xl font-bold text-black">Summary</h1>
-                    <h2>{formatDate(profile.lastUpdated)}</h2>
+                    {/* <h2>{formatDate(profile.lastUpdated)}</h2> */}
                 </div>
             </div>
             <InformationCard
                 IconComponent={HiInformationCircle}
                 title="Information"
                 titleColor="text-blue-600"
-                bodyText={profile?.description || "No information provided."}
+                bodyText={profile?.description || undefined}
             />
             {
-                !profile?.weight && !profile?.bmi && !profile?.runningDistance && !profile?.steps && !profile?.cardioFitness && !profile?.runningDistance && !profile?.steps && !profile?.workoutMinutes && (
+                !demoMode && !profile?.weight && !profile?.bmi && !profile?.runningDistance && !profile?.steps && !profile?.cardioFitness && !profile?.runningDistance && !profile?.steps && !profile?.workoutMinutes && (
                     <InformationCard
                         IconComponent={SiZeromq}
                         title="No Available Statistics"
@@ -66,82 +71,72 @@ export const Summary: React.FC<SummaryProps> = ({ uid }) => {
             }
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {profile?.weight && profile?.startWeight && (
-                    <StatisticCard
-                        IconComponent={BsPersonFill}
-                        title="Weight"
-                        titleColor="text-purple-600"
-                        statistic={{
-                            value: profile.weight.toString(),
-                            unit: "lbs",
-                            description: "(" + (profile.weight - profile.startWeight).toFixed(2).toString() + " lbs)",
-                        }}
-                    />
-                )}
-                {profile?.runningDistance && profile.runningTimestamp && (
-                    <StatisticCard
-                        IconComponent={FaRunning}
-                        title="Running"
-                        titleColor="text-green-600"
-                        statistic={{
-                            value: profile.runningDistance.toString(),
-                            unit: "MI",
-                            description: formatDate(profile.runningTimestamp),
-                        }}
-                    />
-                )}
-                {profile?.bmi && (
-                    <StatisticCard
-                        IconComponent={BsPersonFill}
-                        title="Body Mass Index"
-                        titleColor="text-purple-600"
-                        statistic={{
-                            value: profile.bmi.toString(),
-                            unit: "BMI",
-                            description: getBMICategory(profile.bmi),
-                        }}
-                    />
-                )}
-                {
-                    profile?.cardioFitness && profile?.age && (
-                        <StatisticCard
-                            IconComponent={BsHeartFill}
-                            title="Cardio Fitness"
-                            titleColor="text-red-600"
-                            statistic={{
-                                value: profile.cardioFitness.toString(),
-                                unit: "VO2 max",
-                                description: getVO2MaxCategory(profile.cardioFitness, profile.age)
-                            }}
-                        />
-                    )}
-                {
-                    profile?.steps && profile?.stepsTimestamp && (
-                        <StatisticCard
-                            IconComponent={FaFire}
-                            title="Daily Steps"
-                            titleColor="text-orange-600"
-                            statistic={{
-                                value: profile.steps.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-                                unit: "Steps",
-                                description: formatDate(profile.stepsTimestamp),
-                            }}
-                        />
-                    )
-                }
-                {
-                    profile?.workoutMinutes && profile?.workoutTimestamp && (
-                        <StatisticCard
-                            IconComponent={FaFire}
-                            title="Workouts"
-                            titleColor="text-orange-600"
-                            statistic={{
-                                value: profile.workoutMinutes.toString(),
-                                unit: "Min",
-                                description: formatDate(profile.workoutTimestamp),
-                            }}
-                        />
-                    )}
+                <StatisticCard
+                    hide={!demoMode && !profile?.weight && !profile?.startWeight}
+                    IconComponent={BsPersonFill}
+                    title="Weight"
+                    titleColor="text-purple-600"
+                    statistic={profile?.weight && profile?.startWeight ? {
+                        value: profile.weight.toString(),
+                        unit: "lbs",
+                        description: "(" + (profile.weight - profile.startWeight).toFixed(2).toString() + " lbs)",
+                    } : undefined}
+                />
+                <StatisticCard
+                    hide={!demoMode && !profile?.runningDistance}
+                    IconComponent={FaRunning}
+                    title="Running"
+                    titleColor="text-green-600"
+                    statistic={profile?.runningDistance && profile?.runningTimestamp ? {
+                        value: profile.runningDistance.toString(),
+                        unit: "MI",
+                        description: formatDate(profile.runningTimestamp),
+                    } : undefined}
+                />
+                <StatisticCard
+                    hide={!demoMode && !profile?.cardioFitness}
+                    IconComponent={BsPersonFill}
+                    title="Body Mass Index"
+                    titleColor="text-purple-600"
+                    statistic={profile?.bmi ? {
+                        value: profile.bmi.toString(),
+                        unit: "BMI",
+                        description: getBMICategory(profile.bmi),
+                    } : undefined}
+                />
+                <StatisticCard
+                    hide={!demoMode && !profile?.cardioFitness && !profile?.age}
+                    IconComponent={BsHeartFill}
+                    title="Cardio Fitness"
+                    titleColor="text-red-600"
+                    statistic={profile?.cardioFitness && profile?.age ? {
+                        value: profile.cardioFitness.toString(),
+                        unit: "VO2 max",
+                        description: getVO2MaxCategory(profile.cardioFitness, profile.age)
+                    } : undefined}
+                />
+                <StatisticCard
+                    hide={!demoMode && !profile?.steps && !profile?.stepsTimestamp}
+                    IconComponent={FaFire}
+                    title="Daily Steps"
+                    titleColor="text-orange-600"
+                    statistic={profile?.steps && profile?.stepsTimestamp ? {
+                        value: profile.steps.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                        unit: "Steps",
+                        description: formatDate(profile.stepsTimestamp),
+                    } : undefined}
+                />
+                <StatisticCard
+                    hide={!demoMode && !profile?.workoutMinutes && !profile?.workoutTimestamp}
+                    IconComponent={FaFire}
+                    title="Workouts"
+                    titleColor="text-orange-600"
+                    statistic={profile?.workoutMinutes && profile?.workoutTimestamp ? {
+                        value: profile.workoutMinutes.toString(),
+                        unit: "Min",
+                        description: formatDate(profile.workoutTimestamp),
+                    } : undefined}
+                />
             </div>
         </div>
     </>
