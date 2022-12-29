@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         <div className="flex min-h-screen flex-col items-center  bg-gray-200">
           <div className="container flex max-w-4xl flex-col justify-center gap-4 px-4 py-6">
             <div className="inline-flex items-center justify-between">
-              <h1 className="mb-2 text-5xl font-bold text-black">Developer Documentation</h1>
+              <h1 className="mb-2 text-5xl font-bold text-black">Documentation</h1>
             </div>
             <InformationCard
               IconComponent={HiInformationCircle}
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
             />
 
             <Card>
-              <CardHeader title="Developer Documentation" IconComponent={AiFillApi} titleColor={'text-blue-600'} />
+              <CardHeader title="API Documentation" IconComponent={AiFillApi} titleColor={'text-blue-600'} />
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                   <h3 className="text-lg font-semibold">What does this API accomplish?</h3>
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
                   Make sure to include your API secret in the Authorization header of your request.
                 </p>
                 <p className="text-gray-500 bg-gray-100 rounded-lg px-4 mb-2">
-                  <code style={{ whiteSpace: 'pre' }}>
+                  <code className="break-words">
                     Authorization: m06sasd-not-a-real-key-j8heqlei8
                   </code>
                 </p>
