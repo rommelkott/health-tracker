@@ -1,3 +1,4 @@
+import { Profile } from "@prisma/client";
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { z } from "zod";
 
@@ -17,7 +18,7 @@ const restricted = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ error: "Missing request body" });
   }
 
-  let keys;
+  let keys: any;
   try {
     keys = z.object({
       profile: z.object({
@@ -37,6 +38,20 @@ const restricted = async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (error: any) {
     return res.status(400).json({ error: JSON.parse(error.message) });
   }
+
+  // add timestamps if properties are present
+  if (keys.profile.steps) {
+    keys.profile.stepsTimestamp = new Date();
+  }
+
+  if (keys.profile.runningDistance) {
+    keys.profile.runningTimestamp = new Date();
+  }
+
+  if (keys.profile.workoutMinutes) {
+    keys.profile.workoutTimestamp = new Date();
+  }
+
 
   const findUser = await prisma.user.findUnique({
     where: {
