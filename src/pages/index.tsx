@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Header } from "../components/header/Header";
 import { Summary } from "../components/profile/Summary";
 import { clientEnv } from "../env/schema.mjs";
+import { BsDiscord } from "react-icons/bs";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
@@ -27,12 +28,10 @@ const Home: NextPage = () => {
               <h1 className="text-5xl md:text-7xl mb-3 font-extrabold">
                 Health Tracker
               </h1>
-              <h2 className="text-2xl mb-6 px-12 2xl:px-0">
-                A simple way to share your health and fitness goals with your friends.
-              </h2>
               <button className="border-y bg-indigo-600 text-white px-4 py-2 rounded-lg mt-4 font-semibold">
                 <a onClick={() => signIn('discord')}>
-                  Sign in with Discord
+                  <BsDiscord className="inline-block mr-2" />
+                  <span>Sign in with Discord</span>
                 </a>
               </button>
             </div>
