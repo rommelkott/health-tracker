@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { InformationCard } from "../components/InformationCard";
+import { InformationCard } from "../components/card/InformationCard";
 import { HiInformationCircle } from "react-icons/hi";
-import { Card, CardHeader } from "../components/header/Card";
+import { Card, CardHeader } from "../components/card/Card";
 import { AiFillApi } from "react-icons/ai";
 import Header from "../components/header/Header";
 
@@ -28,12 +28,12 @@ const Home: NextPage = () => {
             <div className="inline-flex items-center justify-between">
               <h1 className="mb-2 text-5xl font-bold text-black">Documentation</h1>
             </div>
-            <InformationCard
+            {/* <InformationCard
               IconComponent={HiInformationCircle}
               title="This page is under development"
               titleColor="text-orange-600"
               bodyText="Note that this page is still under development. Some features may not work as intended."
-            />
+            /> */}
 
             <Card>
               <CardHeader title="API Documentation" IconComponent={AiFillApi} titleColor={'text-blue-600'} />

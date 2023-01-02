@@ -1,6 +1,6 @@
 import React from "react";
 import { Session } from "next-auth";
-import { ProfileButton } from "./ProfileButton";
+import { ProfileButton } from "../header/ProfileButton";
 
 
 interface HeaderProps {

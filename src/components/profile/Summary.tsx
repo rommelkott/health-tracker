@@ -1,6 +1,6 @@
 import React from "react";
-import { InformationCard } from "../header/InformationCard";
-import { StatisticCard } from "../header/StatisticCard";
+import { InformationCard } from "../card/InformationCard";
+import { StatisticCard } from "../card/StatisticCard";
 import { HiInformationCircle } from "react-icons/hi";
 import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
 import { FaFire, FaHeart, FaRunning, FaDiscord } from "react-icons/fa";

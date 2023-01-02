@@ -2,9 +2,9 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
-import { InformationCard } from "../components/header/InformationCard";
+import { InformationCard } from "../components/card/InformationCard";
 import { HiInformationCircle } from "react-icons/hi";
-import { Card, CardHeader } from "../components/header/Card";
+import { Card, CardHeader } from "../components/card/Card";
 import { AiFillApi } from "react-icons/ai";
 import Header from "../components/header/Header";
 const Home: NextPage = () => {
