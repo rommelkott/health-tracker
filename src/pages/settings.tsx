@@ -4,9 +4,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import { InformationCard } from "../components/InformationCard";
 import { HiInformationCircle } from "react-icons/hi";
-import { Card, CardHeader } from "../components/Card";
+import { Card, CardHeader } from "../components/header/Card";
 import { AiFillApi } from "react-icons/ai";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 const Home: NextPage = () => {
   const session = useSession();
 

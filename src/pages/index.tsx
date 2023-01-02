@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Header } from "../components/Header";
-import { Summary } from "../components/Summary";
+import { Header } from "../components/header/Header";
+import { Summary } from "../components/profile/Summary";
 import { clientEnv } from "../env/schema.mjs";
 
 const Home: NextPage = () => {

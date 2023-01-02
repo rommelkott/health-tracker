@@ -2,6 +2,7 @@ import React from "react";
 import { Session } from "next-auth";
 import { ProfileButton } from "./ProfileButton";
 
+
 interface HeaderProps {
     status: "authenticated" | "loading" | "unauthenticated";
     session: Session | null;

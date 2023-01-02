@@ -1,11 +1,11 @@
 import React from "react";
-import { InformationCard } from "./InformationCard";
-import { StatisticCard } from "./StatisticCard";
+import { InformationCard } from "../header/InformationCard";
+import { StatisticCard } from "../header/StatisticCard";
 import { HiInformationCircle } from "react-icons/hi";
 import { BsHeartFill, BsPerson, BsPersonFill } from "react-icons/bs";
 import { FaFire, FaHeart, FaRunning, FaDiscord } from "react-icons/fa";
 import { SiZeromq } from "react-icons/si";
-import { trpc } from "../utils/trpc";
+import { trpc } from "../../utils/trpc";
 import { Profile } from "@prisma/client";
 
 interface SummaryProps {
