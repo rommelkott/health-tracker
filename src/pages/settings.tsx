@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
-import { InformationCard } from "../components/InformationCard";
+import { InformationCard } from "../components/header/InformationCard";
 import { HiInformationCircle } from "react-icons/hi";
 import { Card, CardHeader } from "../components/header/Card";
 import { AiFillApi } from "react-icons/ai";
