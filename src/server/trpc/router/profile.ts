@@ -18,19 +18,19 @@ export const profileRouter = router({
             cardioFitness: true,
             userId: true,
             weights: {
-              orderBy: { date: "asc" },
+              orderBy: { date: "desc" },
               take: 1,
             },
             stepCounts: {
-              orderBy: { date: "asc" },
+              orderBy: { date: "desc" },
               take: 1,
             },
             workoutMinutes: {
-              orderBy: { date: "asc" },
+              orderBy: { date: "desc" },
               take: 1,
             },
             runningSessions: {
-              orderBy: { date: "asc" },
+              orderBy: { date: "desc" },
               take: 1,
             }
           }
