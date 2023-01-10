@@ -28,6 +28,10 @@ export const profileRouter = router({
             workoutMinutes: {
               orderBy: { date: "asc" },
               take: 1,
+            },
+            runningSessions: {
+              orderBy: { date: "asc" },
+              take: 1,
             }
           }
         })
@@ -41,15 +45,20 @@ export const profileRouter = router({
 
       // calculate bmi
       let bmi = profile.weights[0]?.weight && profile.height ?
-        ((profile.weights[0].weight / (profile.height * profile.height)) * 703).toFixed(2)
+        Number(((profile.weights[0].weight / (profile.height * profile.height)) * 703).toFixed(2))
         : null;
 
+      bmi = Number(bmi?.toFixed(2));
       // remove birthday & height from profile
       const { birthday, height, ...rest } = profile;
+
+      // calculate age
+      const age = birthday ? Math.floor((new Date().getTime() - new Date(birthday).getTime()) / 3.15576e+10) : null;
 
       // finally return the profile
       return {
         ...rest,
+        age,
         bmi
       };
     }),
