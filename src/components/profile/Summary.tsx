@@ -10,11 +10,9 @@ import { Profile } from "@prisma/client";
 
 interface SummaryProps {
     uid: string;
-    // will show all cards while loading, skip spinner and error message
-    demoMode?: boolean;
 }
 
-export const Summary: React.FC<SummaryProps> = ({ uid, demoMode = false }) => {
+export const Summary: React.FC<SummaryProps> = ({ uid }) => {
     const { status, data: profile, error } = trpc.profile.getProfile.useQuery({ userId: uid as string },
         {
             enabled: uid !== undefined,
@@ -25,7 +23,7 @@ export const Summary: React.FC<SummaryProps> = ({ uid, demoMode = false }) => {
             retry: false,
         });
 
-    if (status === 'loading' && !demoMode) {
+    if (status === 'loading') {
         return <div>
             <div className="flex justify-center items-center h-screen bg-gray-200">
                 <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
@@ -33,7 +31,7 @@ export const Summary: React.FC<SummaryProps> = ({ uid, demoMode = false }) => {
         </div>
     }
 
-    if (status === 'error' && !demoMode) {
+    if (status === 'error') {
         return <div>
             <div className="flex flex-col gap-2 justify-center items-center h-screen bg-gray-200">
                 <div className="text-5xl font-bold text-red-600">Error</div>
@@ -55,84 +53,88 @@ export const Summary: React.FC<SummaryProps> = ({ uid, demoMode = false }) => {
                 titleColor="text-blue-600"
                 bodyText={profile?.description || undefined}
             />
-            {
-                !demoMode && !profile?.weight && !profile?.bmi && !profile?.runningDistance && !profile?.steps && !profile?.cardioFitness && !profile?.runningDistance && !profile?.steps && !profile?.workoutMinutes && (
-                    <InformationCard
-                        IconComponent={SiZeromq}
-                        title="No Available Statistics"
-                        titleColor="text-red-600"
-                        bodyText="This user has not provided any statistics."
-                    />
-                )
-            }
-
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <StatisticCard
-                    hide={!demoMode && !profile?.weight && !profile?.startWeight}
-                    IconComponent={BsPersonFill}
-                    title="Weight"
-                    titleColor="text-purple-600"
-                    statistic={profile?.weight && profile?.startWeight ? {
-                        value: profile.weight.toString(),
-                        unit: "lbs",
-                        description: "(" + (profile.weight - profile.startWeight).toFixed(2).toString() + " lbs)",
-                    } : undefined}
-                />
-                <StatisticCard
-                    hide={!demoMode && !profile?.runningDistance}
-                    IconComponent={FaRunning}
-                    title="Running"
-                    titleColor="text-green-600"
-                    statistic={profile?.runningDistance && profile?.runningTimestamp ? {
-                        value: profile.runningDistance.toString(),
-                        unit: "MI",
-                        description: formatDate(profile.runningTimestamp),
-                    } : undefined}
-                />
-                <StatisticCard
-                    hide={!demoMode && !profile?.cardioFitness}
-                    IconComponent={BsPersonFill}
-                    title="Body Mass Index"
-                    titleColor="text-purple-600"
-                    statistic={profile?.bmi ? {
-                        value: profile.bmi.toString(),
-                        unit: "BMI",
-                        description: getBMICategory(profile.bmi),
-                    } : undefined}
-                />
-                <StatisticCard
-                    hide={!demoMode && !profile?.cardioFitness && !profile?.age}
-                    IconComponent={BsHeartFill}
-                    title="Cardio Fitness"
+            {(profile.weights.length + profile.runningSessions.length + profile.stepCounts.length) === 0 && profile.cardioFitness == null && (
+                <InformationCard
+                    IconComponent={SiZeromq}
+                    title="No Available Statistics"
                     titleColor="text-red-600"
-                    statistic={profile?.cardioFitness && profile?.age ? {
-                        value: profile.cardioFitness.toString(),
-                        unit: "VO2 max",
-                        description: getVO2MaxCategory(profile.cardioFitness, profile.age)
-                    } : undefined}
+                    bodyText="This user has not provided any statistics."
                 />
-                <StatisticCard
-                    hide={!demoMode && !profile?.steps && !profile?.stepsTimestamp}
-                    IconComponent={FaFire}
-                    title="Daily Steps"
-                    titleColor="text-orange-600"
-                    statistic={profile?.steps && profile?.stepsTimestamp ? {
-                        value: profile.steps.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-                        unit: "Steps",
-                        description: formatDate(profile.stepsTimestamp),
-                    } : undefined}
-                />
-                <StatisticCard
-                    hide={!demoMode && !profile?.workoutMinutes && !profile?.workoutTimestamp}
-                    IconComponent={FaFire}
-                    title="Workouts"
-                    titleColor="text-orange-600"
-                    statistic={profile?.workoutMinutes && profile?.workoutTimestamp ? {
-                        value: profile.workoutMinutes.toString(),
-                        unit: "Min",
-                        description: formatDate(profile.workoutTimestamp),
-                    } : undefined}
-                />
+            )}
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {profile?.weights[0] && (
+                    <StatisticCard
+                        IconComponent={BsPersonFill}
+                        title="Weight"
+                        titleColor="text-purple-600"
+                        statistic={{
+                            value: profile.weights[0].weight.toString(),
+                            unit: "lbs",
+                            // todo: calculate weight differential
+                            description: formatDate(profile.weights[0].date),
+                        }}
+                    />
+                )}
+                {profile?.runningSessions[0] && (
+                    <StatisticCard
+                        IconComponent={FaRunning}
+                        title="Running"
+                        titleColor="text-green-600"
+                        statistic={{
+                            value: profile.runningSessions[0].distance.toString(),
+                            unit: "MI",
+                            description: formatDate(profile.runningSessions[0].date),
+                        }}
+                    />
+                )}
+                {profile?.bmi && (
+                    <StatisticCard
+                        IconComponent={BsPersonFill}
+                        title="Body Mass Index"
+                        titleColor="text-purple-600"
+                        statistic={{
+                            value: profile.bmi.toString(),
+                            unit: "BMI",
+                            description: getBMICategory(profile.bmi),
+                        }}
+                    />
+                )}
+                {profile?.cardioFitness && (
+                    <StatisticCard
+                        IconComponent={BsHeartFill}
+                        title="Cardio Fitness"
+                        titleColor="text-red-600"
+                        statistic={{
+                            value: profile.cardioFitness.toString(),
+                            unit: "VO2 max",
+                            description: profile?.age ? getVO2MaxCategory(profile.cardioFitness, profile.age) : ""
+                        }}
+                    />
+                )}
+                {profile.stepCounts[0] && (
+                    <StatisticCard
+                        IconComponent={FaFire}
+                        title="Daily Steps"
+                        titleColor="text-orange-600"
+                        statistic={{
+                            value: profile.stepCounts[0].steps.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                            unit: "Steps",
+                            description: formatDate(profile.stepCounts[0].date),
+                        }}
+                    />
+                )}
+                {profile?.workoutMinutes[0] && (
+                    <StatisticCard
+                        IconComponent={FaFire}
+                        title="Workouts"
+                        titleColor="text-orange-600"
+                        statistic={{
+                            value: profile.workoutMinutes[0].minutes.toString(),
+                            unit: "Min",
+                            description: formatDate(profile.workoutMinutes[0].date),
+                        }}
+                    />
+                )}
             </div>
         </div>
     </>

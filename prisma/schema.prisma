@@ -71,14 +71,14 @@ model Profile {
 model Weight {
   id       String   @id @default(cuid())
   weight   Float
-  timestamp DateTime @default(now())
+  date DateTime @default(now())
   profile Profile @relation(fields: [profileId], references: [id])
   profileId String
 }
 
 model WorkoutMinutes {
   id        String   @id @default(cuid())
-  timestamp DateTime @default(now())
+  date DateTime @default(now())
   minutes   Float
   Profile   Profile @relation(fields: [profileId], references: [id])
   profileId String
@@ -86,7 +86,7 @@ model WorkoutMinutes {
 
 model StepCount {
   id        String   @id @default(cuid())
-  timestamp DateTime @default(now())
+  date DateTime @default(now())
   steps     Float
   Profile   Profile @relation(fields: [profileId], references: [id])
   profileId String
@@ -94,7 +94,7 @@ model StepCount {
 
 model RunningSession {
   id        String   @id @default(cuid())
-  timestamp DateTime @default(now())
+  date      DateTime @default(now())
   distance  Float
   duration  Float
   Profile   Profile @relation(fields: [profileId], references: [id])
