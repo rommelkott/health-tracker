@@ -1,29 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 
 interface CardProps {
-  title: string;
+  title?: string;
   // tailwind css color
   titleColor?: string;
-  IconComponent: React.ComponentType<any>;
+  IconComponent?: React.ComponentType<any>;
   statistic?: {
     value: string;
     unit: string;
     description?: string;
   };
-  hide: boolean;
 }
 
 export const StatisticCard: React.FC<CardProps> = ({
-  title,
+  title = "",
   titleColor = "text-black",
   statistic,
   IconComponent: Icon = () => <></>,
-  hide = false,
 }) => {
-
-  if (hide) {
-    return <></>;
-  }
 
   return (
     <>
