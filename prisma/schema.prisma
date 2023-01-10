@@ -48,22 +48,57 @@ model Session {
 }
 
 model Profile {
-  id     String @id @default(cuid())
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
-  lastUpdated DateTime @default(now()) @updatedAt 
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @unique
+  lastUpdated DateTime @default(now()) @updatedAt
   description String?
-  weight Float?
-  startWeight Float?
-  age Int?
-  bmi Float?
+
+  // health information
+  birthday    DateTime?
+  height      Int?
+
+  // fitness information
   cardioFitness Float?
-  runningDistance Float?
-  runningTimestamp DateTime?
-  steps Float?
-  stepsTimestamp DateTime?
-  workoutMinutes Float?
-  workoutTimestamp DateTime?
+
+  // activity information
+  workoutMinutes  WorkoutMinutes[]
+  stepCounts      StepCount[]
+  runningSessions RunningSession[]
+  weights         Weight[]
+}
+
+model Weight {
+  id       String   @id @default(cuid())
+  weight   Float
+  timestamp DateTime @default(now())
+  profile Profile @relation(fields: [profileId], references: [id])
+  profileId String
+}
+
+model WorkoutMinutes {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
+  minutes   Float
+  Profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String
+}
+
+model StepCount {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
+  steps     Float
+  Profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String
+}
+
+model RunningSession {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
+  distance  Float
+  duration  Float
+  Profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String
 }
 
 model User {
@@ -75,7 +110,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profile       Profile?
-  apiKey           String?   @unique
+  apiKey        String?   @unique
 }
 
 model VerificationToken {
