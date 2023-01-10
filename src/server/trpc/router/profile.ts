@@ -40,7 +40,9 @@ export const profileRouter = router({
       }
 
       // calculate bmi
-      const bmi = profile.weights[0]?.weight && profile.height ? (profile.weights[0].weight / (profile.height * profile.height)) * 703 : null;
+      let bmi = profile.weights[0]?.weight && profile.height ?
+        ((profile.weights[0].weight / (profile.height * profile.height)) * 703).toFixed(2)
+        : null;
 
       // remove birthday & height from profile
       const { birthday, height, ...rest } = profile;
