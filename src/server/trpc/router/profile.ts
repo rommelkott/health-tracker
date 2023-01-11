@@ -186,6 +186,7 @@ export const profileRouter = router({
       description: z.string().optional(),
       birthday: z.date().optional(),
       height: z.number().optional(),
+      cardioFitness: z.number().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.findUnique({
