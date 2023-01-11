@@ -35,20 +35,20 @@ export const ProfileButton: React.FC<ProfileButtonProps> = ({
               >
                 <div className="py-1">
                   <DropdownMenu.Item
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                     onSelect={() => (window.location.href = "/u/" + session.user?.id)}
                   >
                     Your Profile
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                     onSelect={() => (window.location.href = "/settings")}
                   >
                     Account Settings
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
 
-                    className="block px-4 py-2 text-sm text-red-700 hover:bg-red-100"
+                    className="block px-4 py-2 text-sm text-red-700 hover:bg-red-100 cursor-pointer"
                     onSelect={handleSignOut}
                   >
                     Sign out
