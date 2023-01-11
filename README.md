@@ -18,8 +18,8 @@ Here are some of the features to be developed in the webapp:
 
 Here is the current to-do list for the Weight Tracker webapp:
 
-- [ ] Implement user authentication
+- [x] Implement user authentication
 - [ ] Allow for editing of account details
-- [ ] Build API to enable integration with external scripts
+- [x] Build API to enable integration with external scripts
 - [ ] Create downloadable shortcuts for desktop and mobile devices
-- [ ] Design and implement a user-friendly interface with Tailwind
+- [x] Design and implement a user-friendly interface with Tailwind
