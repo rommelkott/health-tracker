@@ -1,6 +1,5 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 export const profileRouter = router({
@@ -62,4 +61,156 @@ export const profileRouter = router({
         bmi
       };
     }),
+  createDailySteps: protectedProcedure
+    .input(z.object({
+      steps: z.number(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+        include: {
+          profile: true
+        }
+      })
+
+      if (!user || !user.profile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      const stepCount = await ctx.prisma.stepCount.create({
+        data: {
+          steps: input.steps,
+          profileId: user.profile.id,
+        }
+      })
+
+      return stepCount;
+    }),
+  createWeight: protectedProcedure
+    .input(z.object({
+      weight: z.number(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+        include: {
+          profile: true
+        }
+      });
+
+      if (!user || !user.profile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      const weight = await ctx.prisma.weight.create({
+        data: {
+          weight: input.weight,
+          profileId: user.profile.id,
+        }
+      })
+
+      return weight;
+    }),
+  createWorkoutMinutes: protectedProcedure
+    .input(z.object({
+      minutes: z.number(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+        include: {
+          profile: true
+        }
+      })
+
+      if (!user || !user.profile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      const workoutMinutes = await ctx.prisma.workoutMinutes.create({
+        data: {
+          minutes: input.minutes,
+          profileId: user.profile.id,
+        }
+      });
+
+      return workoutMinutes;
+    }),
+  createRunningSession: protectedProcedure
+    .input(z.object({
+      distance: z.number(),
+      duration: z.number(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      let user = await ctx.prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+        include: {
+          profile: true
+        }
+      })
+
+      if (!user || !user.profile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        })
+      }
+
+      const runningSession = await ctx.prisma.runningSession.create({
+        data: {
+          distance: input.distance,
+          duration: input.duration,
+          profileId: user.profile.id,
+        }
+      });
+    }),
+  updateProfile: protectedProcedure
+    .input(z.object({
+      description: z.string().optional(),
+      birthday: z.date().optional(),
+      height: z.number().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+        include: {
+          profile: true
+        }
+      })
+
+      if (!user || !user.profile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      const profile = await ctx.prisma.profile.update({
+        where: {
+          id: user.profile.id,
+        },
+        data: input,
+      });
+
+      return profile;
+    })
 });
