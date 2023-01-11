@@ -180,6 +180,8 @@ export const profileRouter = router({
           profileId: user.profile.id,
         }
       });
+
+      return runningSession;
     }),
   updateProfile: protectedProcedure
     .input(z.object({
